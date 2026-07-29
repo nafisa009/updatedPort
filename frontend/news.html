@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News — Nafisa Nasrin</title>
+<meta name="description" content="Latest achievements, milestones, and updates from Nafisa Nasrin.">
+<meta property="og:title" content="News — Nafisa Nasrin">
+<meta property="og:description" content="Latest achievements, milestones, and updates from Nafisa Nasrin.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-header"></div>
+
+<header class="page-hero">
+  <p class="page-eyebrow">04 — Chronicle</p>
+  <h1 class="page-title">News &amp; Achievements</h1>
+  <p class="page-lead">Milestones I've hit, and updates on what I'm currently working on.</p>
+</header>
+
+<section class="section">
+  <div class="news-filter" id="newsFilter">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="achievement">Achievements</button>
+    <button class="filter-chip" data-filter="update">Updates</button>
+  </div>
+  <div class="news-list" id="newsList"></div>
+</section>
+
+<div id="app-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/chatbot.js"></script>
+<script>
+  const newsList = document.getElementById("newsList");
+  const sorted = [...window.PORTFOLIO_DATA.news].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  function monthDay(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  }
+  function year(iso) { return new Date(iso).getFullYear(); }
+
+  function render(filter) {
+    const items = filter === "all" ? sorted : sorted.filter(n => n.type === filter);
+    if (items.length === 0) {
+      newsList.innerHTML = `<p class="guestbook-empty">Nothing here yet.</p>`;
+      return;
+    }
+    newsList.innerHTML = items.map(n => `
+      <div class="news-card reveal">
+        <div class="news-date">${monthDay(n.date)}<small>${year(n.date)}</small></div>
+        <div>
+          <span class="news-tag">${n.type === "achievement" ? "Achievement" : "Update"}</span>
+          <h3>${n.title}</h3>
+          <p>${n.desc}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  render("all");
+
+  document.getElementById("newsFilter").addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-chip");
+    if (!btn) return;
+    document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+    render(btn.dataset.filter);
+  });
+</script>
+</body>
+</html>

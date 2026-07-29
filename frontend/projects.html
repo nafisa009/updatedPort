@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Nafisa Nasrin</title>
+<meta name="description" content="Capstone projects, web apps, and games built by Nafisa Nasrin, including CampusNova, a Women Safety App, and more.">
+<meta property="og:title" content="Projects — Nafisa Nasrin">
+<meta property="og:description" content="Capstone projects, web apps, and games built by Nafisa Nasrin.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-header"></div>
+
+<header class="page-hero">
+  <p class="page-eyebrow">03 — Expeditions</p>
+  <h1 class="page-title">Projects</h1>
+  <p class="page-lead">Capstones, web apps, and games I've designed and built — with the problem each one set out to solve.</p>
+</header>
+
+<section class="section">
+  <div class="filter-bar" id="filterBar" role="group" aria-label="Filter projects by technology"></div>
+
+  <h3 class="subheading">Capstone Projects</h3>
+  <div class="projects-featured" id="capstoneGrid"></div>
+
+  <h3 class="subheading">Other Builds</h3>
+  <div class="projects-grid" id="projectsGrid"></div>
+
+  <p class="section-note" style="margin-top:26px;">Live demo &amp; repo links marked "Coming soon" haven't been published yet — edit <code>js/data.js</code> to add them once your projects are hosted.</p>
+</section>
+
+<div id="app-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/chatbot.js"></script>
+<script>
+  const allProjects = [
+    ...window.PORTFOLIO_DATA.capstoneProjects.map(p => ({ ...p, featured: true })),
+    ...window.PORTFOLIO_DATA.otherProjects.map(p => ({ ...p, featured: false })),
+  ];
+
+  function projectLinks(p) {
+    const live = p.liveUrl
+      ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo →</a>`
+      : `<span class="project-link disabled">Live Demo — Coming soon</span>`;
+    const repo = p.repoUrl
+      ? `<a href="${p.repoUrl}" target="_blank" rel="noopener noreferrer" class="project-link">Code →</a>`
+      : `<span class="project-link disabled">Code — Coming soon</span>`;
+    return `<div class="project-links">${live}${repo}</div>`;
+  }
+
+  function cardHTML(p) {
+    return `
+      <div class="project-card ${p.featured ? "featured" : ""} reveal" data-stack="${p.stack.join("|")}">
+        <div class="project-card-head">
+          <span class="project-tag">${p.tag}</span>
+          ${p.duration ? `<span class="project-duration">${p.duration}</span>` : ""}
+        </div>
+        <h3>${p.title}</h3>
+        ${p.role ? `<p class="project-role">${p.role}</p>` : ""}
+        <p>${p.desc}</p>
+        ${p.problem ? `
+          <div class="project-problem">
+            <span class="project-subhead">The problem</span>
+            <p>${p.problem}</p>
+          </div>` : ""}
+        ${p.highlights && p.highlights.length ? `
+          <div class="project-highlights">
+            <span class="project-subhead">Key features</span>
+            <ul>${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+          </div>` : ""}
+        <div class="project-stack">${p.stack.map(s => `<span class="stack-chip">${s}</span>`).join("")}</div>
+        ${projectLinks(p)}
+      </div>
+    `;
+  }
+
+  document.getElementById("capstoneGrid").innerHTML =
+    window.PORTFOLIO_DATA.capstoneProjects.map(p => cardHTML({ ...p, featured: true })).join("");
+  document.getElementById("projectsGrid").innerHTML =
+    window.PORTFOLIO_DATA.otherProjects.map(p => cardHTML({ ...p, featured: false })).join("");
+
+  // ---- Tech filter ----
+  const allTech = [...new Set(allProjects.flatMap(p => p.stack))].sort();
+  const filterBar = document.getElementById("filterBar");
+  filterBar.innerHTML = `<button class="filter-chip active" data-filter="all">All</button>` +
+    allTech.map(t => `<button class="filter-chip" data-filter="${t}">${t}</button>`).join("");
+
+  filterBar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-chip");
+    if (!btn) return;
+    filterBar.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const filter = btn.dataset.filter;
+    document.querySelectorAll(".project-card").forEach(card => {
+      const stacks = card.dataset.stack.split("|");
+      const show = filter === "all" || stacks.includes(filter);
+      card.style.display = show ? "" : "none";
+    });
+  });
+</script>
+</body>
+</html>

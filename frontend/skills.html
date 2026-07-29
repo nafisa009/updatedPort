@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Nafisa Nasrin</title>
+<meta name="description" content="Technical and soft skills of Nafisa Nasrin — HTML, CSS, JavaScript, React, Python, Node.js, Data Structures & Algorithms, and more.">
+<meta property="og:title" content="Skills — Nafisa Nasrin">
+<meta property="og:description" content="Technologies and tools Nafisa Nasrin uses to bring ideas to life.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-header"></div>
+
+<header class="page-hero">
+  <p class="page-eyebrow">02 — Devil Fruit Powers</p>
+  <h1 class="page-title">Skills</h1>
+  <p class="page-lead">Technologies and tools I use to bring ideas to life.</p>
+</header>
+
+<section class="section">
+  <div id="skillsByCategory"></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="section-eyebrow">Also Comfortable With</p>
+    <h2 class="section-title">Additional Skills</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Project Management</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Teamwork</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Leadership</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Time Management</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Communication</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Critical Thinking</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Technical Writing</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">MS Office</span></div>
+    <div class="skill-badge"><span class="skill-icon">✦</span><span class="skill-name">Canva</span></div>
+  </div>
+</section>
+
+<div id="app-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/chatbot.js"></script>
+<script>
+  const skills = window.PORTFOLIO_DATA.skills;
+  const categories = [...new Set(skills.map(s => s.category || "Other"))];
+  const container = document.getElementById("skillsByCategory");
+
+  container.innerHTML = categories.map(cat => `
+    <div class="skill-category-block">
+      <h3 class="subheading">${cat}</h3>
+      <div class="skills-grid">
+        ${skills.filter(s => (s.category || "Other") === cat).map(s => `
+          <div class="skill-badge reveal">
+            <span class="skill-icon">✦</span>
+            <span class="skill-name">${s.name}</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-level="${s.level}"></div></div>
+            ${s.note ? `<p class="skill-note">${s.note}</p>` : ""}
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  // animate bars in once visible
+  const bars = container.querySelectorAll(".skill-bar-fill");
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.dataset.level + "%";
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObserver.observe(b));
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education — Nafisa Nasrin</title>
+<meta name="description" content="Nafisa Nasrin's education, coursework, and CGPA at Daffodil International University.">
+<meta property="og:title" content="Education — Nafisa Nasrin">
+<meta property="og:description" content="Nafisa Nasrin's education, coursework, and CGPA at Daffodil International University.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-header"></div>
+
+<header class="page-hero">
+  <p class="page-eyebrow">06 — The Path</p>
+  <h1 class="page-title">Education &amp; Certificates</h1>
+  <p class="page-lead">My academic journey and the credentials along the way.</p>
+</header>
+
+<section class="section">
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2024 — Present</span>
+        <h3>BSc in Software Engineering</h3>
+        <p>Daffodil International University · CGPA: 3.58 / 4.00</p>
+        <p style="margin-top:6px; font-size:0.9rem;">Relevant coursework: Computer Fundamentals, Mathematics I &amp; II, Structured Programming, Software Requirements Specification (SRS), Data Structures, Modern Physics, Capstone Project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="section-eyebrow">05 — Ancient Seals</p>
+    <h2 class="section-title">Certificates</h2>
+  </div>
+  <p class="section-note">Placeholder entries below — swap in real certificates anytime (see <code>js/data.js</code>).</p>
+  <div class="cert-grid" id="certGrid"></div>
+</section>
+
+<div id="app-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/chatbot.js"></script>
+<script>
+  document.getElementById("certGrid").innerHTML = window.PORTFOLIO_DATA.certificates.map(c => `
+    <div class="cert-card reveal">
+      <span class="cert-icon">❖</span>
+      <h4>${c.name}</h4>
+      <p>${c.issuer} — ${c.year}</p>
+    </div>
+  `).join("");
+</script>
+</body>
+</html>

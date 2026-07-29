@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Nafisa Nasrin</title>
+<meta name="description" content="Learn about Nafisa Nasrin's background, story, and what drives her as a software engineering student and developer.">
+<meta property="og:title" content="About — Nafisa Nasrin">
+<meta property="og:description" content="Learn about Nafisa Nasrin's background, story, and what drives her as a software engineering student and developer.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-header"></div>
+
+<header class="page-hero">
+  <p class="page-eyebrow">01 — The Archive</p>
+  <h1 class="page-title">About Me</h1>
+  <p class="page-lead">Software Engineering student, builder, and lifelong curious mind.</p>
+</header>
+
+<section class="section">
+  <div class="about-grid">
+    <div class="about-card poneglyph">
+      <div class="poneglyph-border"></div>
+      <p class="about-text">
+        I'm <strong>Nafisa Nasrin</strong>, a Software Engineering student at
+        <strong>Daffodil International University</strong>, currently in my journey since 2024.
+        Like an archaeologist piecing together ancient history, I enjoy digging into problems,
+        breaking them apart, and building something meaningful out of the pieces — whether that's
+        a web app, a game, or a tool that makes someone's day a little easier.
+      </p>
+      <p class="about-text">
+        I work comfortably across the stack — from crafting interfaces with
+        <strong>HTML, CSS, JavaScript &amp; React</strong>, to solving problems with
+        <strong>Python, C, Java</strong> and a solid grip on <strong>Data Structures &amp; Algorithms</strong>.
+        I believe good software, like good history, is built one careful layer at a time.
+      </p>
+      <p class="about-text">
+        Outside of code, I've spent years in leadership roles — from captaining a debate team to
+        organizing drills as a Girl Guide Captain — which shaped how I communicate, plan, and lead
+        in team settings today.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">9+</span>
+        <span class="stat-label">Tech &amp; Tools</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">2024</span>
+        <span class="stat-label">Journey Began</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="section-eyebrow">Beyond the Code</p>
+    <h2 class="section-title">Leadership &amp; Involvement</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2024 — Present</span>
+        <h3>Software Engineering Club — Member</h3>
+        <p>Active participant in club initiatives, contributing to collaborative projects and technical discussions.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2024 — Present</span>
+        <h3>Data Science Club — Member</h3>
+        <p>Contributing to projects and discussions on data analysis and machine learning fundamentals.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2021 — 2023</span>
+        <h3>BNCC — Member</h3>
+        <p>Participated in leadership training programs and drills, developing discipline and teamwork skills.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2016 — 2020</span>
+        <h3>Debate Team — Captain</h3>
+        <p>Led the debate team, organizing practices, mentoring members, and representing the institution in competitions.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">2016 — 2020</span>
+        <h3>Girl Guide — Captain</h3>
+        <p>Built leadership, crisis-response, and organizational skills through field activities and events.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="section-eyebrow">Beyond Code</p>
+    <h2 class="section-title">Languages</h2>
+  </div>
+  <div class="skills-grid" id="languagesGrid"></div>
+</section>
+
+<div id="app-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/chatbot.js"></script>
+<script>
+  document.getElementById("languagesGrid").innerHTML = window.PORTFOLIO_DATA.languages.map(l => `
+    <div class="skill-badge reveal">
+      <span class="skill-icon">✦</span>
+      <span class="skill-name">${l.name}</span>
+      <p class="skill-note">${l.level}</p>
+    </div>
+  `).join("");
+</script>
+</body>
+</html>

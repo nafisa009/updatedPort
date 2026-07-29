@@ -1,0 +1,7 @@
+# Allow all search engines to crawl the whole site.
+# Update the Sitemap line below with your real GitHub Pages URL once deployed.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://nafisa009.github.io/nafisa-portfolio/sitemap.xml
